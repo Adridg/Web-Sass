@@ -1,0 +1,228 @@
+$colorFondo: #FFAA38;
+$colorBorde: #B53502;
+$list: 700px, 1200px;
+
+@mixin tamanioPosicion ($altura: 999px, $ancho: 999%, $padding: 999%, $maxAncho: 999%, $float: "", $izquierdo: 999%, $derecho: 999%, $arriba: 999%, $abajo: 999%) {
+  @if $ancho != 999%{
+    width: $ancho;}
+  @if $altura != 999px{
+    height: $altura;}
+  @if $padding != 999%{
+    padding: $padding;}
+  @if $maxAncho != 999%{
+     max-width: $maxAncho;}
+  @if $float != ""{
+    float: $float;}
+
+  @if $izquierdo != 999%{
+    margin-left: $izquierdo;}
+  @if $derecho != 999%{
+    margin-right: $derecho;}
+  @if $arriba != 999%{
+    margin-top: $arriba;}
+  @if $abajo != 999%{
+    margin-bottom: $abajo;}
+}
+
+@mixin configurarTextos ($alineacion:"", $tamanioLetra:"", $weight:"", $fuente: 0){
+  @if $fuente== 1{
+    font-family: 'Germania One', cursive, Arial, Georgia, Serif;
+  }@else if $fuente== 2{
+    font-family: 'Faustina', serif,  Arial, Georgia, Serif;}
+    
+  @if $alineacion != ""{
+     text-align: $alineacion;}
+  @if $tamanioLetra != ""{
+    font-size: $tamanioLetra;}
+  @if $weight != ""{
+    font-weight: $weight;}
+}
+
+@mixin backgroundImg( $url:"")
+{
+  background-image: url($url);
+	background-repeat: no-repeat;
+	background-size:100% 100%;
+}
+
+body {
+  @include backgroundImg("recursos/imagen1.jpg");
+ }
+ 
+header {
+  @include backgroundImg("recursos/fondo.jpg");
+ }
+
+ header h3{
+   @include configurarTextos($alineacion: center, $tamanioLetra: x-largue, $weight: bold);
+ }
+
+#logo {
+  @include tamanioPosicion ($altura: 120px, $ancho: 70%, $izquierdo: 35%, $arriba: 2%);
+  img {@include tamanioPosicion ($maxAncho: 100, $arriba: 5% );}
+}
+
+
+/******************************************************************/
+/*crear el menu*/
+#menu {
+  @include tamanioPosicion ($altura: 160px, $maxAncho: 80%, $izquierdo: 10%);
+}
+
+#listaMenu{
+  list-style: none;
+  @include tamanioPosicion ($izquierdo: 11%);
+  a{display: block;
+    @include tamanioPosicion ($ancho: 100%, $altura: 100%);};
+  li {background-color: $colorFondo;
+      border: 1px solid $colorBorde;
+      @include tamanioPosicion ($ancho: 60%, $float: left);
+      @include configurarTextos ($alineacion: center, $fuente: 1,$tamanioLetra: x-large);
+      &:hoover{@include tamanioPosicion($padding: 2px);
+               background-color: $colorFondo;}}
+}
+
+/*******************************************************************/
+#links {
+	display: none;
+}
+
+#social {
+  border: 2px solid $colorBorde;
+  background-color: $colorFondo;
+  @include tamanioPosicion($abajo: 4%);
+  @include configurarTextos ($alineacion: center, $fuente: 2);
+  .facebook{@include tamanioPosicion($derecho: 2%, $arriba: 2%, $float: left);}
+  .twitter{ @include tamanioPosicion($izquierdo: 37%, $derecho: 6%, $arriba: 2%, $float: left);}
+  p{@include tamanioPosicion($izquierdo: 23%, $derecho: 2%, $arriba: 2%, $float: left);}
+}
+
+/***********************************************************************/
+/*configuración de los iconos de las rrss*/
+
+.twitter {
+  @include tamanioPosicion ($altura: 31px, $ancho: 31px, $izquierdo: 2%, $derecho: 32%);
+  background: transparent url("recursos/rrss.jpg");
+  background-position: -32px 0px;
+  transition: background-position .1s ease-out;
+  &:hover {background-position: -32px -33px;}
+}
+
+.facebook {
+  @include tamanioPosicion ($altura: 31px, $ancho: 31px);
+  background: transparent url("recursos/rrss.jpg");
+  background-position: -64px 0px;
+  transition-property: background-position;
+  transition-duration: .1s;
+  transition-timing-function: ease-out;
+  &:hover {background-position: -64px -33px;}
+}
+
+/*********************************************************************/
+#central{
+	border: 2px solid $colorBorde;
+	background-color: $colorFondo;
+	p{margin-left: 2%;};
+	#portada, #ubicacion{@include tamanioPosicion($maxAncho: 70%, $izquierdo: 12%, $arriba: 2%, $abajo: 4%);};
+}
+
+#pie {
+  border: 2px solid $colorBorde;
+  background-color: $colorFondo;
+  clear: both;
+  @include tamanioPosicion($arriba: 5%);
+  p {	@include configurarTextos  ($alineacion: center);}
+}
+
+table {
+  display: none;
+}
+
+#mapa {
+  @include tamanioPosicion ($ancho: 40%, $izquierdo: 40%, $arriba: 4%);
+}
+
+#fecha {
+  @include configurarTextos  ($alineacion: center, $tamanioLetra: large, $weight: bold);
+}
+
+.imagen {
+   @include tamanioPosicion ($abajo: 2%);
+   img {@include tamanioPosicion ($ancho: 90%, $izquierdo: 5%, $arriba: 3%);}
+}
+
+/**********************************************************************/
+@media (min-width: nth($list, 1)){ 
+  #logo {
+    @include tamanioPosicion($ancho: 15%, $izquierdo: 40%);
+  }
+  
+  header h3 {
+    @include tamanioPosicion($izquierdo: 37%, $arriba: -3%);
+  }
+  
+
+  #menu {
+     @include tamanioPosicion($altura: 65px);
+  }
+
+  #listaMenu li {
+     @include tamanioPosicion($ancho: 18%);
+  }
+
+  	#social {
+ 	  @include tamanioPosicion($ancho: 32%, $float: right);
+	}
+
+ #links {
+	display:block;
+	@include tamanioPosicion( $izquierdo: -14%, $arriba: -11%);
+   }
+
+ #central{
+	  @include tamanioPosicion($ancho: 60%, $abajo: 5%, $float: left);
+	  #portada, #ubicacion {@include tamanioPosicion($maxAncho: 50%, $izquierdo: 20%, $arriba: 0%, $abajo: 2%);}
+	}	
+
+  table {
+  	display: block;
+  	@include tamanioPosicion($izquierdo: 30%);
+  }
+
+   #mapa{
+  	display: none;
+  }
+}
+/*************************************************************************/
+@media (min-width: nth($list, 2)){
+ header {
+   @include tamanioPosicion ($altura: 180px);
+   h3{position: relative;
+      top: 35%;
+      @include tamanioPosicion ($izquierdo: 0%, $arriba: 0%);}
+  }
+
+ #logo {
+    @include tamanioPosicion ($ancho: 10%, $float: left, $izquierdo: 2%, $derecho: 2%, $arriba: 2%, $abajo: 2%);
+  }
+
+  #listaMenu li {
+    @include tamanioPosicion ($ancho: 19%, $arriba: 10%);
+  }
+
+  #social  {
+    @include tamanioPosicion ($ancho: 19%);
+  }
+
+   #central {
+    @include tamanioPosicion ($ancho: 75%, $float: left);
+  }	
+
+   table	{
+     @include tamanioPosicion($izquierdo: 40%);
+	}
+
+  .imagen{
+	   @include tamanioPosicion ($ancho: 33%, $float: left, $arriba: 1%, $abajo: 1%);
+	}
+}
